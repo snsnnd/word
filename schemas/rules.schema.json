@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "thesis-formatter rules.json",
+  "description": "见 docs/01 §2。规则表结构。",
+  "type": "object",
+  "required": ["default", "styles"],
+  "properties": {
+    "default": {"$ref": "#/definitions/style"},
+    "styles": {
+      "type": "object",
+      "description": "键为 BlockType 的 snake_case 值，见 docs/06 §1.2",
+      "additionalProperties": {"$ref": "#/definitions/style"}
+    },
+    "heading": {
+      "type": "object",
+      "properties": {
+        "levels": {"type": "integer", "minimum": 1, "maximum": 4},
+        "numbering": {"type": "string"},
+        "caption_prefix": {
+          "type": "object",
+          "properties": {"figure": {"type": "string"}, "table": {"type": "string"}}
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "max_width_cm": {"type": "number"},
+        "alignment": {"type": "string"},
+        "keep_original_ratio": {"type": "boolean"},
+        "anchor": {"type": "string", "enum": ["inline", "keep"]}
+      }
+    },
+    "table": {
+      "type": "object",
+      "properties": {
+        "style": {"type": "string"},
+        "header_row": {"type": "string"},
+        "repeat_header": {"type": "boolean"}
+      }
+    },
+    "formula": {
+      "type": "object",
+      "properties": {
+        "alignment": {"type": "string"},
+        "numbering": {"type": "string"},
+        "number_format": {"type": "string"}
+      }
+    },
+    "section": {
+      "type": "object",
+      "properties": {
+        "cover_page_number": {"type": "string"},
+        "frontmatter_numbering": {"type": "string"},
+        "mainmatter_start": {"type": "integer"}
+      }
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "size": {"type": "string"},
+        "margins_cm": {"$ref": "#/definitions/margins"}
+      }
+    },
+    "classify": {
+      "type": "object",
+      "properties": {
+        "llm_fallback": {"type": "boolean"},
+        "llm_model": {"type": "string"},
+        "llm_batch_size": {"type": "integer"},
+        "low_confidence_threshold": {"type": "number"}
+      }
+    }
+  },
+  "definitions": {
+    "style": {
+      "type": "object",
+      "properties": {
+        "font_cn": {"type": "string"},
+        "font_en": {"type": "string"},
+        "size_pt": {"type": "number"},
+        "bold": {"type": "boolean"},
+        "italic": {"type": "boolean"},
+        "align": {"type": "string", "enum": ["left", "center", "right", "justify"]},
+        "line_spacing": {"type": "number"},
+        "first_line_indent_chars": {"type": "number"},
+        "hanging_indent_chars": {"type": "number"},
+        "space_before_pt": {"type": "number"},
+        "space_after_pt": {"type": "number"}
+      }
+    },
+    "margins": {
+      "type": "object",
+      "properties": {
+        "top": {"type": "number"},
+        "bottom": {"type": "number"},
+        "left": {"type": "number"},
+        "right": {"type": "number"}
+      }
+    }
+  }
+}

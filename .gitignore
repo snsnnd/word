@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# 本地产物 / 临时文件
+out/
+*.pdf
+.lo_profile/
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store
